@@ -7,10 +7,15 @@
 
 \LoadClass{article}
 
+\RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{calc}
 \RequirePackage{lastpage}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
+\RequirePackage{titling}
+\RequirePackage{setspace}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Page Setup
@@ -30,6 +35,44 @@
 \def\@updated{\@empty}
 \newcommand{\updated}[1]{\def\@updated{#1}}
 \newcommand{\showUpdated}{\if\@updated\@empty\else Updated: \@updated\fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cover Letter Option
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\coverLetter}[3]{
+  \newgeometry{letterpaper, top=0.8in, bottom=0.83in, left=0.78in, right=0.78in}
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[black!60, fill=black!60] ($(current page.north west) + (0.78in,0)$) rectangle ($(current page.north west) + (4.28in,-0.25in)$);
+    \draw[black!60, fill=black!60] ($(current page.south west) + (0.78in,0)$) rectangle ($(current page.south west) + (4.28in,0.15in)$);
+  \end{tikzpicture}
+  \sffamily
+  \noindent
+  {\fontseries{bx} \huge \MakeUppercase{\@name}}
+
+  {\Large #2 $\mid$ #3}
+
+  \vspace{0.5in}
+
+  {\bf \Large \thedate}
+
+  \vspace{0.5in}
+
+  {\bf \Large Dear Sir/Madame:}
+
+  \begin{onehalfspace}
+    {\large \input{#1} }
+  \end{onehalfspace}
+
+  {\large Sincerely,}
+
+  \vspace{0.75in}
+
+  {\bf \large \@name}
+
+  \setcounter{page}{1}
+  \restoregeometry
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Boolean Definitions
