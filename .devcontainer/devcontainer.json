@@ -1,0 +1,26 @@
+{
+    "build": {"dockerfile": "Dockerfile"},
+    "postCreateCommand": " git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "valentjn.vscode-ltex",
+                "james-yu.latex-workshop"
+            ],
+            "settings": {
+                "editor.rulers": [80],
+                "ltex.ltex-ls.path": "/opt/ltex-ls-15.2.0",
+                "latex-workshop.latex.recipes": [
+                    {
+                        "name": "pdflatex",
+                        "tools": [
+                            "pdflatex"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "remoteUser": "latex-user",
+
+}
